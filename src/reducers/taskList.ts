@@ -22,7 +22,7 @@ export default function tasks (state = getInitialState(), action: AnyAction) {
   
     switch (action.type) {
         case 'ADD_TASK': {
-            const tasks = [ ...state, action.task ];
+            const tasks = [ action.task, ...state ];
             localStorage.setItem('tasks', JSON.stringify(tasks));
             return tasks;
         }
@@ -43,6 +43,10 @@ export default function tasks (state = getInitialState(), action: AnyAction) {
             const tasks = [ ...state ];
             localStorage.setItem('tasks', JSON.stringify(tasks));
             return tasks;
+        }
+        case 'SET_TASKS': {
+            localStorage.setItem('tasks', JSON.stringify(action.tasks));
+            return action.tasks;
         }
         default: {
             return state;
